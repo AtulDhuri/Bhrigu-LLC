@@ -1,0 +1,60 @@
+<div class="container mx-auto px-4 py-8 max-w-md">
+  <hlm-card>
+    <hlm-card-header>
+      <hlm-card-title class="text-3xl text-center">Login</hlm-card-title>
+    </hlm-card-header>
+    <hlm-card-content>
+      @if (returnUrl()) {
+        <div class="mb-4 p-3 bg-muted rounded-md text-sm text-center" role="status">
+          <p>Please log in to continue</p>
+        </div>
+      }
+      
+      @if (errorMessage()) {
+        <div class="mb-4 p-3 bg-destructive/10 text-destructive rounded-md text-sm" role="alert" aria-live="polite">
+          {{ errorMessage() }}
+        </div>
+      }
+      
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="space-y-4">
+        <div class="space-y-2">
+          <label hlmLabel for="username">Username</label>
+          <input
+            hlmInput
+            type="text"
+            id="username"
+            name="username"
+            [ngModel]="username()"
+            (ngModelChange)="username.set($event)"
+            required
+            autocomplete="username"
+            aria-required="true"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label hlmLabel for="password">Password</label>
+          <input
+            hlmInput
+            type="password"
+            id="password"
+            name="password"
+            [ngModel]="password()"
+            (ngModelChange)="password.set($event)"
+            required
+            autocomplete="current-password"
+            aria-required="true"
+          />
+        </div>
+
+        <button hlmBtn type="submit" [disabled]="!loginForm.valid" class="w-full">
+          Login
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-muted-foreground mt-4">
+        Don't have an account? <a routerLink="/signup" class="text-primary hover:underline">Sign up</a>
+      </p>
+    </hlm-card-content>
+  </hlm-card>
+</div>

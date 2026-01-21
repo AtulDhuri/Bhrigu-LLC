@@ -1,0 +1,15 @@
+/* Textarea specific styling */
+textarea {
+  height: auto !important;
+  min-height: 150px !important;
+  max-height: 400px;
+  line-height: 1.5;
+  font-family: inherit;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  ring: 1px;
+  ring-color: hsl(var(--ring));
+}

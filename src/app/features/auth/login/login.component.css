@@ -1,0 +1,11 @@
+/* Center and constrain form width */
+.container {
+  max-width: 28rem !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hlm-card {
+  width: 100%;
+  max-width: 100%;
+}

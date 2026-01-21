@@ -1,0 +1,118 @@
+<div class="container mx-auto px-4 py-4">
+  <div class="mb-6 back-button-wrapper">
+    <a routerLink="/" hlmBtn variant="outline" class="back-button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      <span>Back to Posts</span>
+    </a>
+  </div>
+
+  @if (post()) {
+  <article class="post-detail-article">
+    <!-- Hero Section -->
+    <div class="post-hero">
+      <div class="post-meta-badges">
+        <span class="post-badge">Article</span>
+        <span class="post-id-badge">#{{ post()!.id }}</span>
+      </div>
+      <h1 class="post-title">{{ post()!.title }}</h1>
+      <div class="post-meta-info">
+        <span class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          5 min read
+        </span>
+        <span class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          {{ comments().length }} comments
+        </span>
+      </div>
+    </div>
+
+    <!-- Post Content -->
+    <hlm-card class="post-content-card">
+      <hlm-card-content>
+        <div class="post-body">
+          <p class="leading-relaxed">{{ post()!.body }}</p>
+        </div>
+      </hlm-card-content>
+    </hlm-card>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+      <div class="comments-header">
+        <div class="comments-title-wrapper">
+          <h2 class="comments-title">Comments</h2>
+          <span class="comments-count">{{ comments().length }}</span>
+        </div>
+        @if (authService.isAuthenticated()) {
+        <a [routerLink]="['/posts', post()!.id, 'add-comment']" hlmBtn class="add-comment-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Add Comment
+        </a>
+        } @else {
+        <a [routerLink]="['/posts', post()!.id, 'add-comment']" hlmBtn variant="outline" class="login-comment-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+          </svg>
+          Login to Comment
+        </a>
+        }
+      </div>
+
+      @if (comments().length > 0) {
+      <div class="comments-list">
+        @for (comment of comments(); track trackByCommentId($index, comment)) {
+        <div class="comment-card" [class.new-comment]="comment.isLocal">
+          <div class="comment-header">
+            <div class="comment-author">
+              <div class="comment-avatar">{{ comment.name.charAt(0).toUpperCase() }}</div>
+              <div class="comment-author-info">
+                <div class="comment-author-name">{{ comment.name }}</div>
+                <div class="comment-author-email">{{ comment.email }}</div>
+              </div>
+            </div>
+            @if (comment.isLocal) {
+            <span class="comment-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              New
+            </span>
+            }
+          </div>
+          <div class="comment-body">
+            {{ comment.body }}
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="no-comments-card">
+        <div class="no-comments-icon">💬</div>
+        <div class="no-comments-text">
+          <h3>No comments yet</h3>
+          <p>Be the first to share your thoughts!</p>
+        </div>
+      </div>
+      }
+    </div>
+  </article>
+  } @else {
+  <div class="loading-skeleton">
+    <div class="skeleton-header"></div>
+    <div class="skeleton-content"></div>
+    <div class="skeleton-comments"></div>
+  </div>
+  }
+</div>

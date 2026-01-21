@@ -1,0 +1,247 @@
+/* Mobile/Desktop view toggle */
+.mobile-view {
+  display: none;
+}
+
+/* .desktop-view {
+  display: block;
+} */
+
+@media (max-width: 768px) {
+  .mobile-view {
+    display: block;
+  }
+
+  .desktop-view {
+    display: none;
+  }
+}
+
+/* Enhanced blog card styling */
+hlm-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated gradient border effect */
+hlm-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+      hsl(var(--primary)),
+      hsl(var(--accent)),
+      hsl(var(--primary)));
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: shimmer 3s linear infinite;
+}
+
+hlm-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Card hover effects */
+hlm-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Title link styling */
+hlm-card-title a {
+  display: block;
+  word-break: break-word;
+  position: relative;
+  transition: color 0.3s ease;
+  background: linear-gradient(to right,
+      hsl(var(--primary)),
+      hsl(var(--primary)));
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  padding-bottom: 2px;
+}
+
+hlm-card:hover hlm-card-title a {
+  background-size: 100% 2px;
+  transition: background-size 0.4s ease;
+}
+
+/* Content text styling */
+hlm-card-content p {
+  word-break: break-word;
+  line-height: 1.7;
+  transition: color 0.3s ease;
+}
+
+/* Read more button enhancement */
+hlm-card-content a[hlmBtn] {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+hlm-card-content a[hlmBtn]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: hsl(var(--primary) / 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+hlm-card-content a[hlmBtn]:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Staggered animation on load */
+hlm-card {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+hlm-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+hlm-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+hlm-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+hlm-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+hlm-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+hlm-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  hlm-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* New design elements */
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg,
+      hsl(var(--primary)),
+      hsl(var(--accent)));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+hlm-card:hover .card-accent {
+  opacity: 1;
+}
+
+.post-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+}
+
+.post-id {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  font-family: 'Courier New', monospace;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+.read-time {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Enhanced card background */
+.blog-card {
+  background: linear-gradient(135deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--card)) 100%);
+}
+
+.blog-card:hover {
+  background: linear-gradient(135deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--muted) / 0.3) 100%);
+}

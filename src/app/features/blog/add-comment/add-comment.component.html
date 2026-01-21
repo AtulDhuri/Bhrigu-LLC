@@ -1,0 +1,48 @@
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+  <div class="mb-6">
+    <a [routerLink]="['/posts', postId()]" hlmBtn variant="outline">← Back to Post</a>
+  </div>
+
+  <hlm-card>
+    <hlm-card-header>
+      <hlm-card-title class="text-3xl">Add Comment</hlm-card-title>
+    </hlm-card-header>
+    <hlm-card-content>
+      @if (errorMessage()) {
+      <div class="mb-4 p-3 bg-destructive/10 text-destructive rounded-md text-sm" role="alert">
+        {{ errorMessage() }}
+      </div>
+      }
+
+      <form (ngSubmit)="onSubmit()" #commentForm="ngForm" class="space-y-4">
+        <div class="space-y-2">
+          <label hlmLabel for="name">Name</label>
+          <input hlmInput type="text" id="name" name="name" [ngModel]="name()" (ngModelChange)="name.set($event)"
+            required />
+        </div>
+
+        <div class="space-y-2">
+          <label hlmLabel for="email">Email</label>
+          <input hlmInput type="email" id="email" name="email" [ngModel]="email()" (ngModelChange)="email.set($event)"
+            required />
+        </div>
+
+        <div class="space-y-2">
+          <label hlmLabel for="body">Comment</label>
+          <textarea id="body" name="body" [ngModel]="body()" (ngModelChange)="body.set($event)" required
+            placeholder="Share your thoughts..." rows="6" style="height: 150px; min-height: 150px; resize: vertical;"
+            class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+        </div>
+
+        <div class="flex gap-3 justify-end">
+          <a [routerLink]="['/posts', postId()]" hlmBtn variant="outline">
+            Cancel
+          </a>
+          <button hlmBtn type="submit" [disabled]="!commentForm.valid">
+            Submit Comment
+          </button>
+        </div>
+      </form>
+    </hlm-card-content>
+  </hlm-card>
+</div>

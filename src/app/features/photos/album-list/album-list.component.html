@@ -1,0 +1,67 @@
+<div class="container mx-auto px-4 py-4">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold mb-2">Photo Albums</h1>
+    <p class="text-muted-foreground text-lg">Browse through our collection of photo albums</p>
+  </div>
+
+  <!-- Desktop: Pagination -->
+  <div class="desktop-view grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    @for (album of paginatedAlbums(); track trackByAlbumId($index, album)) {
+    <a [routerLink]="['/albums', album.id]" class="block album-link">
+      <hlm-card class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
+        <div class="album-icon-wrapper">
+          <lucide-icon name="camera" [size]="48" class="mb-4" />
+          <div class="icon-bg"></div>
+        </div>
+        <hlm-card-header class="text-center">
+          <hlm-card-title>{{ album.title }}</hlm-card-title>
+        </hlm-card-header>
+        <hlm-card-content class="text-center">
+          <div class="album-meta">
+            <span class="album-number">Album #{{ album.id }}</span>
+            <lucide-icon name="arrow-right" [size]="16" class="inline view-arrow" />
+          </div>
+        </hlm-card-content>
+      </hlm-card>
+    </a>
+    }
+  </div>
+
+  @if (totalPages() > 1) {
+  <div class="desktop-view">
+    <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()"
+      (pageChange)="goToPage($event)"></app-pagination>
+  </div>
+  }
+
+  <!-- Mobile: Load More -->
+  <div class="mobile-view grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    @for (album of loadedAlbums(); track trackByAlbumId($index, album)) {
+    <a [routerLink]="['/albums', album.id]" class="block album-link">
+      <hlm-card class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
+        <div class="album-icon-wrapper">
+          <lucide-icon name="camera" [size]="48" class="mb-4" />
+          <div class="icon-bg"></div>
+        </div>
+        <hlm-card-header class="text-center">
+          <hlm-card-title>{{ album.title }}</hlm-card-title>
+        </hlm-card-header>
+        <hlm-card-content class="text-center">
+          <div class="album-meta">
+            <span class="album-number">Album #{{ album.id }}</span>
+            <lucide-icon name="arrow-right" [size]="16" class="inline view-arrow" />
+          </div>
+        </hlm-card-content>
+      </hlm-card>
+    </a>
+    }
+  </div>
+
+  @if (hasMore()) {
+  <div class="mobile-view text-center">
+    <button (click)="loadMore()" hlmBtn size="lg">
+      Load More
+    </button>
+  </div>
+  }
+</div>

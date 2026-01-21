@@ -1,0 +1,64 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container navbar-content">
+    <a routerLink="/" class="navbar-brand" (click)="closeMenu()">
+      <span class="brand-icon" aria-hidden="true">📝</span>
+      <span>Blog & Photos</span>
+    </a>
+
+    <button 
+      class="menu-toggle" 
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="hamburger" [class.open]="menuOpen"></span>
+    </button>
+
+    <div class="navbar-menu" [class.open]="menuOpen">
+      <a 
+        routerLink="/" 
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        (click)="closeMenu()"
+        class="nav-link"
+      >
+        Blog
+      </a>
+      <a 
+        routerLink="/albums" 
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        class="nav-link"
+      >
+        Albums
+      </a>
+
+      <button 
+        class="theme-toggle" 
+        (click)="toggleTheme()"
+        [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
+        title="Toggle theme"
+      >
+        @if (themeService.isDarkMode()) {
+          <span aria-hidden="true">☀️</span>
+        } @else {
+          <span aria-hidden="true">🌙</span>
+        }
+      </button>
+
+      @if (authService.currentUser()) {
+        <div class="user-section">
+          <div class="user-initials" [attr.aria-label]="'Logged in as ' + authService.currentUser()?.firstName + ' ' + authService.currentUser()?.lastName">
+            {{ authService.getInitials() }}
+          </div>
+          <button class="btn-logout" (click)="logout()">Logout</button>
+        </div>
+      } @else {
+        <div class="auth-buttons">
+          <a routerLink="/login" class="btn btn-secondary" (click)="closeMenu()">Login</a>
+          <a routerLink="/signup" class="btn" (click)="closeMenu()">Sign Up</a>
+        </div>
+      }
+    </div>
+  </div>
+</nav>

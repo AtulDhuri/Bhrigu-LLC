@@ -1,0 +1,237 @@
+/* Mobile/Desktop view toggle */
+.mobile-view {
+  display: none;
+}
+
+/* Don't override display property - let Tailwind classes handle it */
+
+@media (max-width: 768px) {
+  .mobile-view {
+    display: block;
+  }
+
+  .desktop-view {
+    display: none;
+  }
+}
+
+/* Enhanced album card styling */
+hlm-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated background on hover */
+hlm-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: hsl(var(--primary) / 0.05);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  z-index: 0;
+}
+
+hlm-card:hover::after {
+  width: 500px;
+  height: 500px;
+}
+
+/* Ensure content stays above background effect */
+hlm-card-header,
+hlm-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card hover effects */
+a.block:hover hlm-card {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon animation */
+hlm-card-header .text-6xl {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+a.block:hover hlm-card-header .text-6xl {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Title styling */
+hlm-card-title {
+  word-break: break-word;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+a.block:hover hlm-card-title {
+  color: hsl(var(--primary));
+}
+
+/* Ensure proper card height in grid */
+a.block {
+  height: 100%;
+  text-decoration: none;
+}
+
+/* Staggered animation on load */
+a.block {
+  animation: fadeInScale 0.6s ease-out backwards;
+}
+
+a.block:nth-child(1) { animation-delay: 0.05s; }
+a.block:nth-child(2) { animation-delay: 0.1s; }
+a.block:nth-child(3) { animation-delay: 0.15s; }
+a.block:nth-child(4) { animation-delay: 0.2s; }
+a.block:nth-child(5) { animation-delay: 0.25s; }
+a.block:nth-child(6) { animation-delay: 0.3s; }
+a.block:nth-child(7) { animation-delay: 0.35s; }
+a.block:nth-child(8) { animation-delay: 0.4s; }
+a.block:nth-child(9) { animation-delay: 0.45s; }
+a.block:nth-child(10) { animation-delay: 0.5s; }
+a.block:nth-child(11) { animation-delay: 0.55s; }
+a.block:nth-child(12) { animation-delay: 0.6s; }
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Pulse effect on album number */
+hlm-card-content p {
+  transition: all 0.3s ease;
+}
+
+a.block:hover hlm-card-content p {
+  color: hsl(var(--primary));
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  a.block:hover hlm-card {
+    transform: translateY(-6px) scale(1.01);
+  }
+}
+
+/* New design elements */
+.album-card {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--muted) / 0.2) 100%
+  );
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+}
+
+.album-link:hover .album-card {
+  border-color: hsl(var(--primary) / 0.3);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--primary) / 0.05) 100%
+  );
+}
+
+.album-icon-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0 1rem;
+  z-index: 1;
+}
+
+.album-icon-wrapper .text-6xl {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.icon-bg {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    hsl(var(--primary) / 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+.album-link:hover .icon-bg {
+  transform: scale(1.3);
+  background: radial-gradient(
+    circle,
+    hsl(var(--primary) / 0.25) 0%,
+    transparent 70%
+  );
+}
+
+.album-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.album-number {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  padding: 0.25rem 0.75rem;
+  background: hsl(var(--muted) / 0.5);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.album-link:hover .album-number {
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+  transform: scale(1.05);
+}
+
+.view-arrow {
+  font-size: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.album-link:hover .view-arrow {
+  opacity: 1;
+  transform: translateX(0);
+  color: hsl(var(--primary));
+}
+
+/* Override previous styles for new structure */
+.album-link {
+  height: 100%;
+  text-decoration: none;
+}
+
+.album-link:hover hlm-card-header .text-6xl {
+  transform: scale(1.15) rotate(8deg);
+}
