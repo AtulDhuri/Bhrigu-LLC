@@ -13,6 +13,62 @@
   .desktop-view {
     display: none;
   }
+
+  /* Force card spacing on mobile - multiple approaches */
+  .mobile-view.grid {
+    gap: 1.5rem !important;
+    row-gap: 1.5rem !important;
+    grid-gap: 1.5rem !important;
+  }
+
+  /* Alternative approach using margin */
+  .mobile-view.grid > * {
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-view.grid > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Better padding for mobile container */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Load More button spacing */
+  .mobile-view.text-center {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  /* Ensure button text is centered */
+  button[hlmBtn] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Ensure desktop view shows on tablet */
+  .desktop-view {
+    display: block;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
+  /* Force card spacing on tablet */
+  .desktop-view.grid {
+    gap: 1.5rem !important;
+    row-gap: 1.5rem !important;
+    grid-gap: 1.5rem !important;
+  }
 }
 
 /* Enhanced album card styling */
@@ -22,6 +78,8 @@ hlm-card {
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #334155 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Animated background on hover */
@@ -33,7 +91,7 @@ hlm-card::after {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: hsl(var(--primary) / 0.05);
+  background: rgba(96, 165, 250, 0.05);
   transform: translate(-50%, -50%);
   transition: width 0.6s ease, height 0.6s ease;
   z-index: 0;
@@ -54,7 +112,7 @@ hlm-card-content {
 /* Card hover effects */
 a.block:hover hlm-card {
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.3);
 }
 
 /* Icon animation */
@@ -67,15 +125,41 @@ a.block:hover hlm-card-header .text-6xl {
   transform: scale(1.2) rotate(5deg);
 }
 
-/* Title styling */
+/* Card header with background for title visibility - Light theme */
+hlm-card-header {
+  background: hsl(var(--card)) !important;
+  border-radius: 8px;
+  margin: 0.5rem;
+  padding: 1rem !important;
+  border: 1px solid hsl(var(--border));
+}
+
+/* Card header - Dark theme override */
+[data-theme="dark"] hlm-card-header {
+  background: #1E293B !important;
+  border: 1px solid #334155;
+}
+
+/* Title styling - Light theme */
 hlm-card-title {
   word-break: break-word;
   transition: color 0.3s ease;
   position: relative;
+  color: hsl(var(--foreground)) !important;
+  font-weight: 700;
 }
 
 a.block:hover hlm-card-title {
-  color: hsl(var(--primary));
+  color: hsl(var(--primary)) !important;
+}
+
+/* Title styling - Dark theme override */
+[data-theme="dark"] hlm-card-title {
+  color: #F1F5F9 !important;
+}
+
+[data-theme="dark"] a.block:hover hlm-card-title {
+  color: #60A5FA !important;
 }
 
 /* Ensure proper card height in grid */
@@ -119,7 +203,7 @@ hlm-card-content p {
 }
 
 a.block:hover hlm-card-content p {
-  color: hsl(var(--primary));
+  color: #F1F5F9;
   font-weight: 600;
 }
 
@@ -128,68 +212,106 @@ a.block:hover hlm-card-content p {
   a.block:hover hlm-card {
     transform: translateY(-6px) scale(1.01);
   }
+
+  /* Better card padding on mobile - Light theme */
+  hlm-card {
+    padding: 0.5rem;
+    background: hsl(var(--card)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+  }
+
+  hlm-card-header {
+    padding: 1rem !important;
+    background: hsl(var(--card)) !important;
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Better card padding on mobile - Dark theme override */
+  [data-theme="dark"] hlm-card {
+    background: #1E293B !important;
+    border: 1px solid #334155 !important;
+  }
+
+  [data-theme="dark"] hlm-card-header {
+    background: #1E293B !important;
+    border: 1px solid #334155;
+  }
+
+  hlm-card-content {
+    padding: 0 1rem 1rem !important;
+  }
+
+  /* Adjust icon size on mobile */
+  .album-icon-wrapper {
+    padding: 1.5rem 1rem 0.75rem;
+  }
+
+  .album-icon-wrapper lucide-angular {
+    width: 56px;
+    height: 56px;
+  }
 }
 
-/* New design elements */
+/* New design elements - Light theme */
 .album-card {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--card)) 0%,
-    hsl(var(--muted) / 0.2) 100%
-  );
-  border: 2px solid transparent;
-  transition: all 0.4s ease;
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .album-link:hover .album-card {
-  border-color: hsl(var(--primary) / 0.3);
-  background: linear-gradient(
-    135deg,
-    hsl(var(--card)) 0%,
-    hsl(var(--primary) / 0.05) 100%
-  );
+  border-color: hsl(var(--primary)) !important;
+  box-shadow: 
+    0 4px 8px rgba(59, 130, 246, 0.15),
+    0 2px 4px rgba(59, 130, 246, 0.1);
+  background: hsl(var(--card)) !important;
+  transform: translateY(-1px);
 }
 
+/* New design elements - Dark theme override */
+[data-theme="dark"] .album-card {
+  background: #1E293B !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .album-link:hover .album-card {
+  border-color: #60A5FA !important;
+  box-shadow: 
+    0 4px 8px rgba(96, 165, 250, 0.15),
+    0 2px 4px rgba(96, 165, 250, 0.1);
+  background: #1E293B !important;
+}
+
+/* Album card specific padding fixes */
 .album-icon-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0 1rem;
+  padding: 2rem 1.5rem 1rem;
   z-index: 1;
 }
 
-.album-icon-wrapper .text-6xl {
+.album-icon-wrapper lucide-angular {
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  color: #94A3B8;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
-.icon-bg {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(
-    circle,
-    hsl(var(--primary) / 0.15) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  z-index: 1;
-  transition: all 0.4s ease;
-}
-
-.album-link:hover .icon-bg {
-  transform: scale(1.3);
-  background: radial-gradient(
-    circle,
-    hsl(var(--primary) / 0.25) 0%,
-    transparent 70%
-  );
+.album-link:hover .album-icon-wrapper lucide-angular {
+  opacity: 1;
+  transform: scale(1.05);
+  color: #60A5FA;
 }
 
 .album-meta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
@@ -199,37 +321,62 @@ a.block:hover hlm-card-content p {
 .album-number {
   font-size: 0.85rem;
   font-weight: 600;
-  color: hsl(var(--muted-foreground));
-  padding: 0.25rem 0.75rem;
-  background: hsl(var(--muted) / 0.5);
+  color: hsl(var(--foreground)) !important;
+  padding: 0.375rem 1rem;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
   border-radius: 12px;
   transition: all 0.3s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .album-link:hover .album-number {
-  background: hsl(var(--primary) / 0.15);
-  color: hsl(var(--primary));
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground)) !important;
+  border-color: hsl(var(--primary));
   transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Dark theme overrides for album number */
+[data-theme="dark"] .album-number {
+  color: #F1F5F9 !important;
+  background: #334155;
+  border: 1px solid #475569;
+}
+
+[data-theme="dark"] .album-link:hover .album-number {
+  background: #60A5FA;
+  color: #0F172A !important;
+  border-color: #60A5FA;
+  box-shadow: 0 2px 6px rgba(96, 165, 250, 0.3);
 }
 
 .view-arrow {
   font-size: 1.25rem;
-  color: hsl(var(--muted-foreground));
+  color: #94A3B8;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateX(-10px);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .album-link:hover .view-arrow {
   opacity: 1;
   transform: translateX(0);
-  color: hsl(var(--primary));
+  color: #0F172A !important;
 }
 
 /* Override previous styles for new structure */
 .album-link {
   height: 100%;
   text-decoration: none;
+  margin-bottom: 10px;
 }
 
 .album-link:hover hlm-card-header .text-6xl {

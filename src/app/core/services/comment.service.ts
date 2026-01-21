@@ -23,7 +23,15 @@ export class CommentService extends BaseApiService<Comment> {
     return this.getByQuery({ postId }).pipe(
       map(apiComments => {
         const localComments = this.getLocalComments(postId);
-        return [...localComments, ...apiComments];
+        const allComments = [...localComments, ...apiComments];
+        
+        // Sort comments by timestamp (newest first)
+        // Local comments have timestamp, API comments use id as fallback
+        return allComments.sort((a, b) => {
+          const timestampA = a.timestamp || a.id;
+          const timestampB = b.timestamp || b.id;
+          return timestampB - timestampA; // Descending order (newest first)
+        });
       })
     );
   }

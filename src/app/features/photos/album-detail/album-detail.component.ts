@@ -7,15 +7,15 @@ import { AlbumService } from '../../../core/services/album.service';
 import { PhotoService } from '../../../core/services/photo.service';
 import { Photo } from '../../../core/models';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { HlmButtonDirective } from '../../../shared/ui/button.directive';
+import { HlmButton } from '@spartan-ng/spar/button';
 
 @Component({
   selector: 'app-album-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, PaginationComponent, HlmButtonDirective],
+  imports: [CommonModule, RouterLink, PaginationComponent, HlmButton],
   templateUrl: './album-detail.component.html',
   styleUrl: './album-detail.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumDetailComponent {
   private route = inject(ActivatedRoute);

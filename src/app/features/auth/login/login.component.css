@@ -3,9 +3,125 @@
   max-width: 28rem !important;
   margin-left: auto;
   margin-right: auto;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 hlm-card {
   width: 100%;
   max-width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+hlm-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Proper spacing for card content */
+hlm-card-header {
+  padding: 2rem 2rem 1rem;
+}
+
+hlm-card-content {
+  padding: 0 2rem 2rem;
+}
+
+/* Form styling */
+form {
+  margin-top: 1.5rem;
+}
+
+/* Input focus states */
+input[hlmInput]:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+/* Button styling */
+button[hlmBtn] {
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+button[hlmBtn]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+button[hlmBtn]:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Alert messages */
+.bg-muted,
+.bg-destructive\/10 {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Link styling */
+a {
+  transition: color 0.2s ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-height: calc(100vh - 150px);
+  }
+
+  hlm-card-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  hlm-card-content {
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  /* Ensure inputs don't overflow */
+  input[hlmInput] {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Title size adjustment */
+  hlm-card-title {
+    font-size: 2rem;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  hlm-card-header {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+
+  hlm-card-content {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  hlm-card-title {
+    font-size: 1.75rem;
+  }
 }

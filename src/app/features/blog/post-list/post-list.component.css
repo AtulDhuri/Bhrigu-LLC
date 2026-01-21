@@ -15,6 +15,62 @@
   .desktop-view {
     display: none;
   }
+
+  /* Force card spacing on mobile - multiple approaches */
+  .mobile-view.grid {
+    gap: 1.5rem !important;
+    row-gap: 1.5rem !important;
+    grid-gap: 1.5rem !important;
+  }
+
+  /* Alternative approach using margin */
+  .mobile-view.grid > * {
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-view.grid > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Better padding for mobile container */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Load More button spacing */
+  .mobile-view.text-center {
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  /* Ensure button text is centered */
+  button[hlmBtn] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Ensure desktop view shows on tablet */
+  .desktop-view {
+    display: block;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
+  /* Force card spacing on tablet */
+  .desktop-view.grid {
+    gap: 1.5rem !important;
+    row-gap: 1.5rem !important;
+    grid-gap: 1.5rem !important;
+  }
 }
 
 /* Enhanced blog card styling */
@@ -162,6 +218,29 @@ hlm-card:nth-child(6) {
   hlm-card:hover {
     transform: translateY(-4px);
   }
+
+  /* Better card padding on mobile */
+  hlm-card {
+    padding: 0.5rem;
+  }
+
+  hlm-card-header {
+    padding: 1rem !important;
+  }
+
+  hlm-card-content {
+    padding: 0 1rem 1rem !important;
+  }
+
+  /* Adjust button sizes on mobile */
+  .read-more-btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .read-time {
+    font-size: 0.7rem;
+  }
 }
 
 /* New design elements */
@@ -210,11 +289,27 @@ hlm-card:hover .card-accent {
   overflow: hidden;
 }
 
+/* Simplified button alignment using Tailwind classes */
 .read-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   position: relative;
+  text-decoration: none !important;
+}
+
+.read-more-btn span {
+  line-height: 1.2;
+}
+
+.read-more-btn lucide-angular {
+  line-height: 1;
+}
+
+.read-time {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.read-time span {
+  line-height: 1.2;
 }
 
 .arrow-icon {
@@ -228,9 +323,10 @@ hlm-card:hover .card-accent {
 .read-time {
   font-size: 0.75rem;
   color: hsl(var(--muted-foreground));
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+}
+
+.read-time span {
+  line-height: 1.2;
 }
 
 /* Enhanced card background */

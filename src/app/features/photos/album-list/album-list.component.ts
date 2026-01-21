@@ -1,35 +1,29 @@
-import { Component, inject, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { AlbumService } from '../../../core/services/album.service';
 import { Album } from '../../../core/models';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import {
-  HlmCardComponent,
-  HlmCardHeaderComponent,
-  HlmCardTitleComponent,
-  HlmCardContentComponent,
-} from '../../../shared/ui/card.component';
-import { HlmButtonDirective } from '../../../shared/ui/button.directive';
+import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardContent } from '@spartan-ng/spar/card';
+import { HlmButton } from '@spartan-ng/spar/button';
 import { BaseListComponent } from '../../../shared/base/base-list.component';
 
 @Component({
   selector: 'app-album-list',
   standalone: true,
   imports: [
-    CommonModule,
     RouterLink,
     PaginationComponent,
-    HlmCardComponent,
-    HlmCardHeaderComponent,
-    HlmCardTitleComponent,
-    HlmCardContentComponent,
-    HlmButtonDirective,
+    HlmCard,
+    HlmCardHeader,
+    HlmCardTitle,
+    HlmCardContent,
+    HlmButton,
     LucideAngularModule,
   ],
   templateUrl: './album-list.component.html',
   styleUrl: './album-list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumListComponent extends BaseListComponent<Album> {
   constructor() {

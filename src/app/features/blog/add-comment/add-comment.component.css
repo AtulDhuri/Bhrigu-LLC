@@ -13,3 +13,45 @@ textarea:focus {
   ring: 1px;
   ring-color: hsl(var(--ring));
 }
+
+/* Proper spacing for card content */
+hlm-card-header {
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+hlm-card-content {
+  padding: 0 1.5rem 1.5rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  hlm-card-header {
+    padding: 1.25rem 1.25rem 0.75rem;
+  }
+
+  hlm-card-content {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  /* Ensure inputs don't overflow */
+  input[hlmInput],
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Stack buttons on very small screens */
+  .flex.gap-3 {
+    flex-direction: column;
+  }
+
+  .flex.gap-3 button,
+  .flex.gap-3 a {
+    width: 100%;
+  }
+}

@@ -1,4 +1,5 @@
 <nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="container navbar-content">
     <a routerLink="/" class="navbar-brand" (click)="closeMenu()">
       <span class="brand-icon" aria-hidden="true">📝</span>
@@ -41,8 +42,10 @@
       >
         @if (themeService.isDarkMode()) {
           <span aria-hidden="true">☀️</span>
+          <span class="theme-label">Light</span>
         } @else {
           <span aria-hidden="true">🌙</span>
+          <span class="theme-label">Dark</span>
         }
       </button>
 

@@ -8,21 +8,20 @@
   <div class="desktop-view grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
     @for (album of paginatedAlbums(); track trackByAlbumId($index, album)) {
     <a [routerLink]="['/albums', album.id]" class="block album-link">
-      <hlm-card class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
+      <div hlmCard class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
         <div class="album-icon-wrapper">
-          <lucide-icon name="camera" [size]="48" class="mb-4" />
-          <div class="icon-bg"></div>
+          <lucide-angular name="camera" [size]="64" class="mb-4" />
         </div>
-        <hlm-card-header class="text-center">
-          <hlm-card-title>{{ album.title }}</hlm-card-title>
-        </hlm-card-header>
-        <hlm-card-content class="text-center">
+        <div hlmCardHeader class="text-center">
+          <h3 hlmCardTitle>{{ album.title }}</h3>
+        </div>
+        <div hlmCardContent class="text-center">
           <div class="album-meta">
             <span class="album-number">Album #{{ album.id }}</span>
-            <lucide-icon name="arrow-right" [size]="16" class="inline view-arrow" />
+            <lucide-angular name="arrow-right" [size]="16" class="inline view-arrow" />
           </div>
-        </hlm-card-content>
-      </hlm-card>
+        </div>
+      </div>
     </a>
     }
   </div>
@@ -35,24 +34,23 @@
   }
 
   <!-- Mobile: Load More -->
-  <div class="mobile-view grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <div class="mobile-view grid grid-cols-1 gap-6 mb-8">
     @for (album of loadedAlbums(); track trackByAlbumId($index, album)) {
     <a [routerLink]="['/albums', album.id]" class="block album-link">
-      <hlm-card class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
+      <div hlmCard class="hover:shadow-lg transition-shadow cursor-pointer h-full album-card">
         <div class="album-icon-wrapper">
-          <lucide-icon name="camera" [size]="48" class="mb-4" />
-          <div class="icon-bg"></div>
+          <lucide-angular name="camera" [size]="64" class="mb-4" />
         </div>
-        <hlm-card-header class="text-center">
-          <hlm-card-title>{{ album.title }}</hlm-card-title>
-        </hlm-card-header>
-        <hlm-card-content class="text-center">
+        <div hlmCardHeader class="text-center">
+          <h3 hlmCardTitle>{{ album.title }}</h3>
+        </div>
+        <div hlmCardContent class="text-center">
           <div class="album-meta">
             <span class="album-number">Album #{{ album.id }}</span>
-            <lucide-icon name="arrow-right" [size]="16" class="inline view-arrow" />
+            <lucide-angular name="arrow-right" [size]="16" class="inline view-arrow" />
           </div>
-        </hlm-card-content>
-      </hlm-card>
+        </div>
+      </div>
     </a>
     }
   </div>
@@ -65,3 +63,4 @@
   </div>
   }
 </div>
+

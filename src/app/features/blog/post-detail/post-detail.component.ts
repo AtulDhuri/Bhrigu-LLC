@@ -7,22 +7,16 @@ import { PostService } from '../../../core/services/post.service';
 import { CommentService } from '../../../core/services/comment.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Comment } from '../../../core/models';
-import { HlmCardComponent, HlmCardContentComponent } from '../../../shared/ui/card.component';
-import { HlmButtonDirective } from '../../../shared/ui/button.directive';
+import { HlmCard, HlmCardContent } from '@spartan-ng/spar/card';
+import { HlmButton } from '@spartan-ng/spar/button';
 
 @Component({
-    selector: 'app-post-detail',
-    standalone: true,
-    imports: [
-        CommonModule, 
-        RouterLink,
-        HlmCardComponent,
-        HlmCardContentComponent,
-        HlmButtonDirective
-    ],
-    templateUrl: './post-detail.component.html',
-    styleUrl: './post-detail.component.css',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-post-detail',
+  standalone: true,
+  imports: [CommonModule, RouterLink, HlmCard, HlmCardContent, HlmButton],
+  templateUrl: './post-detail.component.html',
+  styleUrl: './post-detail.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostDetailComponent {
     private route = inject(ActivatedRoute);

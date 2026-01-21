@@ -7,33 +7,33 @@
   <!-- Desktop: Pagination -->
   <div class="desktop-view grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     @for (post of paginatedPosts(); track trackByPostId($index, post)) {
-    <hlm-card class="blog-card">
+    <div hlmCard class="blog-card">
       <div class="card-accent"></div>
-      <hlm-card-header>
+      <div hlmCardHeader>
         <div class="flex items-start justify-between gap-3 mb-2">
           <span class="post-badge">Article</span>
           <span class="post-id">#{{ post.id }}</span>
         </div>
-        <hlm-card-title>
+        <h3 hlmCardTitle>
           <a [routerLink]="['/posts', post.id]" class="hover:text-primary transition-colors">
             {{ post.title }}
           </a>
-        </hlm-card-title>
-      </hlm-card-header>
-      <hlm-card-content>
+        </h3>
+      </div>
+      <div hlmCardContent>
         <p class="text-muted-foreground mb-4 line-clamp-3">{{ post.body }}</p>
         <div class="flex items-center justify-between">
-          <a [routerLink]="['/posts', post.id]" hlmBtn variant="outline" size="sm" class="read-more-btn">
-            <span>Read more</span>
-            <lucide-icon name="arrow-right" [size]="16" class="arrow-icon" />
+          <a [routerLink]="['/posts', post.id]" hlmBtn variant="outline" size="sm" class="read-more-btn flex items-center gap-2">
+            <span class="inline-block">Read more</span>
+            <lucide-angular name="arrow-right" [size]="16" class="arrow-icon inline-flex" />
           </a>
-          <span class="read-time">
-            <lucide-icon name="book-open" [size]="16" class="inline" />
-            3 min read
+          <span class="read-time flex items-center gap-1">
+            <lucide-angular name="book-open" [size]="16" class="inline" />
+            <span class="inline-block">3 min read</span>
           </span>
         </div>
-      </hlm-card-content>
-    </hlm-card>
+      </div>
+    </div>
     }
   </div>
 
@@ -45,35 +45,35 @@
   }
 
   <!-- Mobile: Load More -->
-  <div class="mobile-view grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div class="mobile-view grid grid-cols-1 gap-6 mb-8">
     @for (post of loadedPosts(); track trackByPostId($index, post)) {
-    <hlm-card class="blog-card">
+    <div hlmCard class="blog-card">
       <div class="card-accent"></div>
-      <hlm-card-header>
+      <div hlmCardHeader>
         <div class="flex items-start justify-between gap-3 mb-2">
           <span class="post-badge">Article</span>
           <span class="post-id">#{{ post.id }}</span>
         </div>
-        <hlm-card-title>
+        <h3 hlmCardTitle>
           <a [routerLink]="['/posts', post.id]" class="hover:text-primary transition-colors">
             {{ post.title }}
           </a>
-        </hlm-card-title>
-      </hlm-card-header>
-      <hlm-card-content>
+        </h3>
+      </div>
+      <div hlmCardContent>
         <p class="text-muted-foreground mb-4 line-clamp-3">{{ post.body }}</p>
         <div class="flex items-center justify-between">
-          <a [routerLink]="['/posts', post.id]" hlmBtn variant="outline" size="sm" class="read-more-btn">
-            <span>Read more</span>
-            <lucide-icon name="arrow-right" [size]="16" class="arrow-icon" />
+          <a [routerLink]="['/posts', post.id]" hlmBtn variant="outline" size="sm" class="read-more-btn flex items-center gap-2">
+            <span class="inline-block">Read more</span>
+            <lucide-angular name="arrow-right" [size]="16" class="arrow-icon inline-flex" />
           </a>
-          <span class="read-time">
-            <lucide-icon name="book-open" [size]="16" class="inline" />
-            3 min read
+          <span class="read-time flex items-center gap-1">
+            <lucide-angular name="book-open" [size]="16" class="inline" />
+            <span class="inline-block">3 min read</span>
           </span>
         </div>
-      </hlm-card-content>
-    </hlm-card>
+      </div>
+    </div>
     }
   </div>
 
@@ -85,3 +85,9 @@
   </div>
   }
 </div>
+
+
+
+
+
+

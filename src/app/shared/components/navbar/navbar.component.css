@@ -8,7 +8,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .navbar-content {
@@ -17,6 +17,7 @@
   justify-content: space-between;
   gap: 2rem;
   max-width: 100%;
+  overflow: visible;
 }
 
 .navbar-brand {
@@ -39,7 +40,8 @@
   border: none;
   padding: 0.5rem;
   cursor: pointer;
-  z-index: 101;
+  z-index: 102;
+  position: relative;
 }
 
 .hamburger {
@@ -87,6 +89,7 @@
   gap: 1.5rem;
   flex: 1;
   justify-content: flex-end;
+  overflow: visible;
 }
 
 .nav-link {
@@ -112,14 +115,23 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .theme-toggle:hover,
 .theme-toggle:focus {
   background-color: hsl(var(--muted));
+}
+
+.theme-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
 }
 
 .user-section {
@@ -164,8 +176,20 @@
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
   .menu-toggle {
     display: block;
+    position: fixed;
+    right: 0.75rem;
+    top: 1.25rem;
+    z-index: 102;
   }
 
   .navbar-menu {
@@ -173,6 +197,7 @@
     top: 0;
     right: -100%;
     width: 280px;
+    /* height: 100vh; */
     background-color: hsl(var(--card));
     flex-direction: column;
     align-items: stretch;
@@ -180,6 +205,8 @@
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease;
     gap: 0.75rem;
+    z-index: 101;
+    overflow-y: auto;
   }
 
   .navbar-menu.open {

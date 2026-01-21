@@ -287,6 +287,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: none;
 }
 
 .comment-badge {
@@ -450,5 +451,46 @@
 
   .comment-card:hover {
     transform: translateX(2px);
+  }
+
+  /* Better container padding on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 5rem;
+  }
+
+  /* Better spacing between sections */
+  .post-content-card {
+    margin-bottom: 2rem;
+  }
+
+  /* Comment card spacing */
+  .comments-list {
+    gap: 1.25rem;
+  }
+
+  /* Fixed back button on mobile */
+  .back-button-wrapper {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    animation: none;
+  }
+
+  .back-button {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 0.875rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+  }
+
+  .back-button:hover {
+    transform: translateX(0) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   }
 }

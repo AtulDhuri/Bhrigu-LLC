@@ -5,11 +5,20 @@
 /tmp
 /out-tsc
 /bazel-out
+*.js.map
 
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Angular
+/.angular/cache
+/.angular/
+.angular/
 
 # IDEs and editors
 .idea/
@@ -19,6 +28,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.sublime-project
 
 # Visual Studio Code
 .vscode/*
@@ -29,14 +39,46 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
 /libpeerconnection.log
 testem.log
 /typings
+*.log
+
+# Testing
+/coverage
+*.spec.js
+e2e/*.js
+e2e/*.map
 
 # System files
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Build artifacts
+*.tsbuildinfo
+.cache/
+
+# Documentation (optional - remove if you want to track these)
+*_AUDIT.md
+*_SUMMARY.md
+*_IMPLEMENTATION.md
+*_OPTIMIZATION.md
+*_STRATEGY.md
+UI_COMPONENTS.md
+
+# Backup folders
+*_old/
+*-backup/
+ui-backup/

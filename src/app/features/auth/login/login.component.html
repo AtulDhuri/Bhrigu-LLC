@@ -1,9 +1,9 @@
 <div class="container mx-auto px-4 py-8 max-w-md">
-  <hlm-card>
-    <hlm-card-header>
-      <hlm-card-title class="text-3xl text-center">Login</hlm-card-title>
-    </hlm-card-header>
-    <hlm-card-content>
+  <div hlmCard>
+    <div hlmCardHeader>
+      <h3 hlmCardTitle class="text-3xl text-center">Login</h3>
+    </div>
+    <div hlmCardContent>
       @if (returnUrl()) {
         <div class="mb-4 p-3 bg-muted rounded-md text-sm text-center" role="status">
           <p>Please log in to continue</p>
@@ -55,6 +55,6 @@
       <p class="text-center text-sm text-muted-foreground mt-4">
         Don't have an account? <a routerLink="/signup" class="text-primary hover:underline">Sign up</a>
       </p>
-    </hlm-card-content>
-  </hlm-card>
+    </div>
+  </div>
 </div>

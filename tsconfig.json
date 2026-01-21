@@ -27,6 +27,21 @@
       ],
       "@spartan-ng/helm/label": [
         "./node_modules/label/src/index.ts"
+      ],
+      "@spartan-ng/spar/button": [
+        "./libs/spartan/button/src/index.ts"
+      ],
+      "@spartan-ng/spar/utils": [
+        "./libs/spartan/utils/src/index.ts"
+      ],
+      "@spartan-ng/spar/label": [
+        "./libs/spartan/label/src/index.ts"
+      ],
+      "@spartan-ng/spar/input": [
+        "./libs/spartan/input/src/index.ts"
+      ],
+      "@spartan-ng/spar/card": [
+        "./libs/spartan/card/src/index.ts"
       ]
     }
   },

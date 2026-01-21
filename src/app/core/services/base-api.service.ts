@@ -1,10 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, catchError } from 'rxjs';
 
 /**
  * Generic base service for API operations
  * Implements DRY principle by extracting common CRUD operations
+ * 
+ * Features:
+ * - Automatic error handling with fallback data
+ * - Type-safe API calls
+ * - Consistent error logging
  * 
  * @example
  * @Injectable({ providedIn: 'root' })
@@ -20,18 +25,45 @@ export abstract class BaseApiService<T> {
 
   constructor(protected apiUrl: string) {}
 
+  /**
+   * Get all items
+   * Returns empty array on error to prevent app crashes
+   */
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.apiUrl);
+    return this.http.get<T[]>(this.apiUrl).pipe(
+      catchError(error => {
+        console.error(`Error fetching all from ${this.apiUrl}:`, error);
+        return of([] as T[]); // Return empty array as fallback
+      })
+    );
   }
 
-  getById(id: number): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${id}`);
+  /**
+   * Get item by ID
+   * Returns null on error
+   */
+  getById(id: number): Observable<T | null> {
+    return this.http.get<T>(`${this.apiUrl}/${id}`).pipe(
+      catchError(error => {
+        console.error(`Error fetching item ${id} from ${this.apiUrl}:`, error);
+        return of(null); // Return null as fallback
+      })
+    );
   }
 
+  /**
+   * Get items by query parameters
+   * Returns empty array on error
+   */
   getByQuery(params: Record<string, any>): Observable<T[]> {
     const queryString = Object.entries(params)
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
-    return this.http.get<T[]>(`${this.apiUrl}?${queryString}`);
+    return this.http.get<T[]>(`${this.apiUrl}?${queryString}`).pipe(
+      catchError(error => {
+        console.error(`Error fetching with query from ${this.apiUrl}:`, error);
+        return of([] as T[]); // Return empty array as fallback
+      })
+    );
   }
 }

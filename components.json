@@ -1,4 +1,4 @@
 {
-  "componentsPath": "node_modules",
-  "importAlias": "@spartan-ng/helm"
+  "componentsPath": "libs/spartan",
+  "importAlias": "@spartan-ng/spar"
 }
