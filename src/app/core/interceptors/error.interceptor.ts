@@ -21,7 +21,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.error instanceof ErrorEvent) {
         // Client-side or network error
         errorMessage = `Network Error: ${error.error.message}`;
-        console.error('Client-side error:', error.error.message);
       } else {
         // Server-side error
         switch (error.status) {

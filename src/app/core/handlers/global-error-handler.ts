@@ -18,16 +18,8 @@ export class GlobalErrorHandler implements ErrorHandler {
   private router = inject(Router);
 
   handleError(error: Error | any): void {
-    // Log error to console
-    console.error('Global error caught:', error);
-
     // Extract error message
     const errorMessage = error?.message || error?.toString() || 'An unexpected error occurred';
-    
-    // Log stack trace in development
-    if (error?.stack) {
-      console.error('Stack trace:', error.stack);
-    }
 
     // TODO: Send error to monitoring service (e.g., Sentry)
     // this.sendToMonitoring(error);
@@ -44,8 +36,6 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   private showErrorToUser(message: string): void {
     // TODO: Implement toast/snackbar notification
-    // For now, just log to console
-    console.warn('User-facing error:', message);
   }
 
   private isCriticalError(error: any): boolean {

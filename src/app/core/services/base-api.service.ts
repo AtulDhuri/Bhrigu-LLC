@@ -31,8 +31,7 @@ export abstract class BaseApiService<T> {
    */
   getAll(): Observable<T[]> {
     return this.http.get<T[]>(this.apiUrl).pipe(
-      catchError(error => {
-        console.error(`Error fetching all from ${this.apiUrl}:`, error);
+      catchError(() => {
         return of([] as T[]); // Return empty array as fallback
       })
     );
@@ -44,8 +43,7 @@ export abstract class BaseApiService<T> {
    */
   getById(id: number): Observable<T | null> {
     return this.http.get<T>(`${this.apiUrl}/${id}`).pipe(
-      catchError(error => {
-        console.error(`Error fetching item ${id} from ${this.apiUrl}:`, error);
+      catchError(() => {
         return of(null); // Return null as fallback
       })
     );

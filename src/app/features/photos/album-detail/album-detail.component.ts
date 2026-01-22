@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, computed, inject, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -29,6 +29,7 @@ export class AlbumDetailComponent {
   modalImageLoading = signal(true);
   modalImageError = signal(false);
   imageTimestamp = signal(Date.now());
+  isLoading = signal(false);
   
   placeholderImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="24" fill="%23999"%3ELoading...%3C/text%3E%3C/svg%3E';
   thumbnailPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect width="200" height="200" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="16" fill="%23999"%3E📷%3C/text%3E%3C/svg%3E';
@@ -134,5 +135,26 @@ export class AlbumDetailComponent {
     img.style.display = 'none';
     this.modalImageLoading.set(false);
     this.modalImageError.set(true);
+  }
+
+  // Infinite scroll implementation
+  @HostListener('window:scroll')
+  onScroll() {
+    // Only trigger on mobile view
+    if (window.innerWidth > 768) return;
+    
+    // Check if user scrolled near bottom (within 200px)
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const bottomPosition = document.documentElement.scrollHeight - 200;
+    
+    if (scrollPosition >= bottomPosition && this.hasMore() && !this.isLoading()) {
+      this.isLoading.set(true);
+      
+      // Simulate loading delay for smooth UX
+      setTimeout(() => {
+        this.loadMore();
+        this.isLoading.set(false);
+      }, 300);
+    }
   }
 }

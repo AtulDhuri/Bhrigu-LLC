@@ -1,11 +1,10 @@
-import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed, ChangeDetectionStrategy, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { AlbumService } from '../../../core/services/album.service';
 import { Album } from '../../../core/models';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardContent } from '@spartan-ng/spar/card';
-import { HlmButton } from '@spartan-ng/spar/button';
 import { BaseListComponent } from '../../../shared/base/base-list.component';
 
 @Component({
@@ -18,7 +17,6 @@ import { BaseListComponent } from '../../../shared/base/base-list.component';
     HlmCardHeader,
     HlmCardTitle,
     HlmCardContent,
-    HlmButton,
     LucideAngularModule,
   ],
   templateUrl: './album-list.component.html',
@@ -26,6 +24,8 @@ import { BaseListComponent } from '../../../shared/base/base-list.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumListComponent extends BaseListComponent<Album> {
+  isLoading = signal(false);
+
   constructor() {
     const albumService = inject(AlbumService);
     super(albumService.getAlbums(), 12);
@@ -41,4 +41,25 @@ export class AlbumListComponent extends BaseListComponent<Album> {
   loadedAlbums = computed(() => this.loadedItems());
 
   trackByAlbumId = this.trackById;
+
+  // Infinite scroll implementation
+  @HostListener('window:scroll')
+  onScroll() {
+    // Only trigger on mobile view
+    if (window.innerWidth > 768) return;
+    
+    // Check if user scrolled near bottom (within 200px)
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const bottomPosition = document.documentElement.scrollHeight - 200;
+    
+    if (scrollPosition >= bottomPosition && this.hasMore() && !this.isLoading()) {
+      this.isLoading.set(true);
+      
+      // Simulate loading delay for smooth UX
+      setTimeout(() => {
+        this.loadMore();
+        this.isLoading.set(false);
+      }, 300);
+    }
+  }
 }

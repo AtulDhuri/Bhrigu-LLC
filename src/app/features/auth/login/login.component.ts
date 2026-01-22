@@ -1,9 +1,7 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
-import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardContent } from '@spartan-ng/spar/card';
 import { HlmButton } from '@spartan-ng/spar/button';
 import { HlmInput } from '@spartan-ng/spar/input';
 import { HlmLabel } from '@spartan-ng/spar/label';
@@ -12,13 +10,8 @@ import { HlmLabel } from '@spartan-ng/spar/label';
   selector: 'app-login',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     RouterLink,
-    HlmCard,
-    HlmCardHeader,
-    HlmCardTitle,
-    HlmCardContent,
     HlmButton,
     HlmInput,
     HlmLabel,

@@ -1,10 +1,8 @@
 import { Component, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommentService } from '../../../core/services/comment.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { HlmCard, HlmCardHeader, HlmCardTitle, HlmCardContent } from '@spartan-ng/spar/card';
 import { HlmButton } from '@spartan-ng/spar/button';
 import { HlmInput } from '@spartan-ng/spar/input';
 import { HlmLabel } from '@spartan-ng/spar/label';
@@ -13,13 +11,8 @@ import { HlmLabel } from '@spartan-ng/spar/label';
   selector: 'app-add-comment',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     RouterLink,
-    HlmCard,
-    HlmCardHeader,
-    HlmCardTitle,
-    HlmCardContent,
     HlmButton,
     HlmInput,
     HlmLabel,

@@ -52,6 +52,111 @@
   }
 }
 
+/* Load More Button Styling */
+.load-more-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-width: 240px;
+  height: 56px;
+  padding: 0 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px hsl(var(--primary) / 0.35);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.load-more-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.load-more-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.load-more-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px hsl(var(--primary) / 0.45);
+}
+
+.load-more-button:active {
+  transform: translateY(-1px);
+}
+
+.load-more-button svg {
+  transition: transform 0.3s ease;
+}
+
+.load-more-button:hover svg {
+  transform: translateY(3px);
+  animation: bounce 0.6s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Loading Spinner Styling */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.spinner {
+  color: hsl(var(--primary));
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Tablet specific adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
   /* Ensure desktop view shows on tablet */
