@@ -36,7 +36,7 @@
 
       <button 
         class="theme-toggle" 
-        (click)="toggleTheme()"
+        (click)="toggleTheme(); closeMenu()"
         [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
         title="Toggle theme"
       >
@@ -54,7 +54,7 @@
           <div class="user-initials" [attr.aria-label]="'Logged in as ' + authService.currentUser()?.firstName + ' ' + authService.currentUser()?.lastName">
             {{ authService.getInitials() }}
           </div>
-          <button class="btn-logout" (click)="logout()">Logout</button>
+          <button class="btn-logout" (click)="logout(); closeMenu()">Logout</button>
         </div>
       } @else {
         <div class="auth-buttons">
